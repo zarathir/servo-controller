@@ -1,0 +1,13 @@
+[package]
+name = "servo-control"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+pwm-pca9685 = "0.3.1"
+linux-embedded-hal = "0.3.2"
+
+[target.armv7-unknown-linux-gnueabihf]
+linker = "arm-none-linux-gnueabihf-gcc"
