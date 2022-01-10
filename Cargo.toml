@@ -8,6 +8,3 @@ edition = "2021"
 [dependencies]
 pwm-pca9685 = "0.3.1"
 linux-embedded-hal = "0.3.2"
-
-[target.armv7-unknown-linux-gnueabihf]
-linker = "arm-none-linux-gnueabihf-gcc"
