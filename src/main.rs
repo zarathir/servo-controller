@@ -1,5 +1,7 @@
-use servo_control::{ServoController, ServoMotor};
 use std::{io::stdin, num::ParseIntError, thread, time};
+
+mod servo;
+use crate::servo::{Controller, Motor};
 
 fn sleep(time: u64) {
     thread::sleep(time::Duration::from_millis(time * 1000));
@@ -18,10 +20,10 @@ fn get_input() -> Result<u32, ParseIntError> {
 }
 
 fn main() {
-    let mut controller = ServoController::new("/dev/i2c-1");
+    let mut controller = Controller::new("/dev/i2c-1");
     controller.init(60);
 
-    let mut motor_1 = ServoMotor::new(0, 90).unwrap();
+    let mut motor_1 = Motor::new(0, 90).unwrap();
     let start_angle = motor_1.get_angle();
     controller.set_motor_angle(&mut motor_1, start_angle);
 
