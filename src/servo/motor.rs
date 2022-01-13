@@ -3,6 +3,7 @@ use pwm_pca9685::Channel;
 pub struct Motor {
     channel: Channel,
     angle: u32,
+    max_angle: u32,
 }
 
 #[derive(Debug)]
@@ -11,7 +12,7 @@ pub enum ChannelError {
 }
 
 impl Motor {
-    pub fn new(channel_number: u8, angle: u32) -> Result<Motor, ChannelError> {
+    pub fn new(channel_number: u8, max_angle: u32) -> Result<Motor, ChannelError> {
         let channel = match channel_number {
             0 => Channel::C0,
             1 => Channel::C1,
@@ -36,7 +37,11 @@ impl Motor {
             }
         };
 
-        Ok(Motor { channel, angle })
+        Ok(Motor {
+            channel,
+            angle: 0,
+            max_angle,
+        })
     }
 
     pub fn set_angle(&mut self, angle: u32) {
@@ -49,5 +54,9 @@ impl Motor {
 
     pub fn get_channel(&mut self) -> Channel {
         self.channel
+    }
+
+    pub fn get_max_angle(&mut self) -> u32 {
+        self.max_angle
     }
 }
