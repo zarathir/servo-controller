@@ -1,8 +1,9 @@
 use pwm_pca9685::Channel;
 
 pub struct Motor {
-    channel: Channel,
+    name: String,
     angle: u32,
+    channel: Channel,
     max_angle: u32,
 }
 
@@ -12,7 +13,7 @@ pub enum ChannelError {
 }
 
 impl Motor {
-    pub fn new(channel_number: u8, max_angle: u32) -> Result<Motor, ChannelError> {
+    pub fn new(name: &str, channel_number: u8, max_angle: u32) -> Result<Motor, ChannelError> {
         let channel = match channel_number {
             0 => Channel::C0,
             1 => Channel::C1,
@@ -38,25 +39,33 @@ impl Motor {
         };
 
         Ok(Motor {
+            name: name.to_string(),
             channel,
             angle: 0,
             max_angle,
         })
     }
 
+    pub fn channel(&self) -> &Channel {
+        &self.channel
+    }
+
+    pub fn max_angle(&self) -> &u32 {
+        &self.max_angle
+    }
+
+    /// Get a reference to the motor's angle.
+    pub fn angle(&self) -> u32 {
+        self.angle
+    }
+
+    /// Set the motor's angle.
     pub fn set_angle(&mut self, angle: u32) {
         self.angle = angle;
     }
 
-    pub fn get_angle(&mut self) -> u32 {
-        self.angle
-    }
-
-    pub fn get_channel(&mut self) -> Channel {
-        self.channel
-    }
-
-    pub fn get_max_angle(&mut self) -> u32 {
-        self.max_angle
+    /// Get a reference to the motor's name.
+    pub fn name(&self) -> &str {
+        &self.name.as_str()
     }
 }
