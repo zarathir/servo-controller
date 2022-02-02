@@ -3,5 +3,5 @@
 ## This library is for controlling Servo Motors from a Raspberry Pi or any development board running Linux.
 
 ### Todo:
-- [ ] Add development container for non ROS hosts
-- [ ] Add JointState subscriber
+- [x] Add development container for non ROS hosts (added as submodule to https://github.com/zarathir/ros-devcontainer)
+- [x] Add JointState subscriber (still needs testing)
